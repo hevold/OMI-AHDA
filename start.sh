@@ -1,0 +1,3 @@
+#!/bin/bash
+export OPENAI_API_KEY=your_openai_api_key_here
+python3 main.py
