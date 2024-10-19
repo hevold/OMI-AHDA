@@ -57,14 +57,7 @@ To get started, you need to download the required scripts from the GitHub reposi
     - (Optional) Run `./start_tunnel.sh` to set up the ngrok tunnel.
 
 ### 2. Environment Setup
-
-To ensure the application functions properly, you need to set up some environment variables. This includes your OpenAI API key and (optionally) ngrok configuration.
-
-1. **Set Up OpenAI API Key**
-
-    Replace the placeholder `your_openai_api_key_here` in `start.bat` (Windows) or `start.sh` (macOS/Linux) with your actual OpenAI API key. This key is required for the application to make requests.
-
-2. **(Optional) Set Up NGROK for Public Domain Access**
+**(Optional) Set Up NGROK for Public Domain Access**
 
     If you want to use ngrok to create a public domain for your application, configure the following in the `start_tunnel.bat` (Windows) or `start_tunnel.sh` (macOS/Linux) script:
 
@@ -72,3 +65,6 @@ To ensure the application functions properly, you need to set up some environmen
     - Replace `STATIC_NGROK_DOMAIN` with your preferred static domain name.
 
     These settings will allow ngrok to establish a tunnel with a consistent public URL.
+
+### 3. Get the URL
+**To get the URL, which you need to enter into the OMI App, simply put in your IP Address with the port 5000 (eg. 0.0.0.0:5000) or the NGROK Domain (eg. https://example.ngrok-free.app)
