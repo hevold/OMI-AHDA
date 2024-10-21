@@ -17,4 +17,4 @@ fi
 
 # Note: A static domain is required for the tunnel
 cd tunnel
-./ngrok http --domain=$STATIC_NGROK_DOMAIN 5000
+./ngrok http --domain=$STATIC_NGROK_DOMAIN 5123
