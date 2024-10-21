@@ -86,4 +86,4 @@ def handle_text_response(text):
 
 if __name__ == '__main__':
     # Ensure the Flask app runs and listens to all external IPs on port 5000
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5123)
