@@ -1,74 +1,91 @@
-# Project Setup Guide
+# AHDA Lite (for OMI.me Devices)
+> **Note**: This app is currently in beta.
 
-This guide will walk you through the setup and execution of the project on both Windows and macOS/Linux systems.
+## Overview
 
-## Prerequisites
+**AHDA Lite** is a streamlined, cloud-powered version of the AHDA digital assistant designed specifically for OMI.me devices. It allows you to control your computer remotely through voice commands, offering AI-powered functionality without requiring complex setups. With AHDA Lite, you can enjoy the benefits of AHDA's features without the need for dedicated backend services or API keys.
 
-Before starting, make sure you have the following installed:
+### What is AHDA?
 
+AHDA is a versatile, open-source digital assistant that integrates cutting-edge AI technology to help you manage your computer from anywhere in the world, using voice commands via OMI devices. It’s your future-proof solution for seamless, hands-free control.
+
+### Differences Between AHDA Lite and AHDA
+
+Unlike the full version of AHDA ([GitHub](https://github.com/ActuallyAdvanced/AHDA)), **AHDA Lite** processes audio in the cloud. This means:
+- **No backend setup required**: You can start using it right away without configuring servers or API keys.
+- **Cloud-based processing**: Similar features to AHDA, but the computation happens remotely.
+- **Screen interaction**: At the current stage, AHDA Lite does not provide screen feedback. This feature is planned for 2025.
+
+## Key Features ✨
+
+- 🌍 **Remote Control**: Manage your PC from anywhere in the world.
+- 🎤 **Voice Activation**: Issue hands-free voice commands for total control.
+- 💼 **AI-Powered Automation**: Let AHDA handle complex tasks on your behalf.
+
+---
+
+## Installation Guide 🛠️
+
+This guide will walk you through the setup and execution of AHDA Lite on Windows and macOS/Linux systems.
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
 - **Python 3.x** (including `pip`)
 
-### 1. Download the Project Files
+### Step 1: Download the Project Files
 
-To get started, you need to download the required scripts from the GitHub repository. Open a terminal or command prompt and run the following command based on your system:
+To get started, download the required scripts from the GitHub repository. Use the following instructions based on your operating system:
 
-#### Windows
+#### Windows Setup
 
 1. **Download Files**
-
     - [main.py](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/main.py)
     - [start.bat](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/start.bat)
-
-    **(Optional: For NGROK Public Domain Setup)**
-    - [start_tunnel.bat](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/starttunnel.bat)
+    - **Optional:** [start_tunnel.bat](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/starttunnel.bat) (for NGROK Public Domain Setup)
 
 2. **Run the Scripts**
+    - Ensure the environment setup is complete before running the scripts (details below).
+    - Double-click `start.bat` to launch the main application.
+    - **Optional:** Double-click `start_tunnel.bat` to configure and set up an NGROK tunnel.
 
-    **Important:** Before running, make sure to complete the environment setup as described below.
-
-    - Double-click `start.bat` to start the main application.
-    - (Optional) Double-click `start_tunnel.bat` to set up the ngrok tunnel.
-
-#### macOS/Linux
-**Note: Not officially tested on macOS/Linux**
+#### macOS/Linux Setup
+> **Note**: AHDA Lite has not been officially tested on macOS/Linux.
 
 1. **Download Files**
-
     - [main.py](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/main.py)
     - [start.sh](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/start.sh)
-
-    **(Optional: For NGROK Public Domain Setup)**
-    - [start_tunnel.sh](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/starttunnel.sh)
+    - **Optional:** [start_tunnel.sh](https://github.com/ActuallyAdvanced/OMI-AHDA/raw/main/starttunnel.sh) (for NGROK Public Domain Setup)
 
 2. **Make Scripts Executable**
-
-    After downloading, make the scripts executable by running:
-
+    After downloading, make the scripts executable:
     ```bash
     chmod +x start.sh
     chmod +x start_tunnel.sh
     ```
 
 3. **Run the Scripts**
+    - Ensure the environment setup is complete before running the scripts (details below).
+    - Execute `./start.sh` to launch the main application.
+    - **Optional:** Run `./start_tunnel.sh` to configure and set up an NGROK tunnel.
 
-    **Important:** Before running, make sure to complete the environment setup as described below.
+### Step 2: Environment Setup
 
-    - Run `./start.sh` to start the main application.
-    - (Optional) Run `./start_tunnel.sh` to set up the ngrok tunnel.
+#### (Optional) Set Up NGROK for Public Domain Access
 
-### 2. Environment Setup
+If you wish to create a public domain for your application via NGROK, follow these steps:
 
-To ensure the application functions properly, you need to set up some environment variables. This includes your OpenAI API key and (optionally) ngrok configuration.
-
-1. **Set Up OpenAI API Key**
-
-    Replace the placeholder `your_openai_api_key_here` in `start.bat` (Windows) or `start.sh` (macOS/Linux) with your actual OpenAI API key. This key is required for the application to make requests.
-
-2. **(Optional) Set Up NGROK for Public Domain Access**
-
-    If you want to use ngrok to create a public domain for your application, configure the following in the `start_tunnel.bat` (Windows) or `start_tunnel.sh` (macOS/Linux) script:
-
-    - Replace `NGROK_API_KEY` with your ngrok API key.
+1. Open the `start_tunnel.bat` (Windows) or `start_tunnel.sh` (macOS/Linux) script.
+2. Update the following placeholders:
+    - Replace `NGROK_API_KEY` with your NGROK API key.
     - Replace `STATIC_NGROK_DOMAIN` with your preferred static domain name.
 
-    These settings will allow ngrok to establish a tunnel with a consistent public URL.
+These configurations will allow NGROK to establish a tunnel with a consistent public URL, enabling easy access to your AHDA Lite setup.
+
+### Step 3: Obtain the URL
+
+To connect AHDA Lite with your OMI.me device, you need the correct URL. You can either:
+1. Use your local IP address with port `5123` (e.g., `http://0.0.0.0:5123`)
+2. Or, use the NGROK-provided domain (e.g., `https://example.ngrok-free.app`)
+
+Enter this URL in the OMI App to begin using AHDA Lite.

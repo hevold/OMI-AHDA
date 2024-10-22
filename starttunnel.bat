@@ -19,4 +19,4 @@ ngrok config add-authtoken %NGROK_API_KEY%
 
 :: Note: A static domain is required for the tunnel
 cd tunnel
-start ngrok http --domain=%STATIC_NGROK_DOMAIN% 5000
+start ngrok http --domain=%STATIC_NGROK_DOMAIN% 5123

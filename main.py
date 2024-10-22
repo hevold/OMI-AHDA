@@ -144,4 +144,4 @@ if __name__ == '__main__':
     # Start the auto-updater
     start_update_thread()
     # Ensure the Flask app runs and listens to all external IPs on port 5000
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5123)
