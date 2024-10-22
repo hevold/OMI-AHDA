@@ -78,7 +78,7 @@ def start_update_thread():
     thread = threading.Thread(target=update_loop, daemon=True)
     thread.start()
 
-@app.route('/recieve', methods=['POST'])
+@app.route('/receive', methods=['POST'])
 def process_transcript():
     data = request.get_json()
     if data:
@@ -88,6 +88,11 @@ def process_transcript():
         else:
             return jsonify({'error': 'No transcript found in request'}), 400
     return jsonify({'error': 'Invalid request data'}), 400
+
+@app.route('/transcript', methods=['POST'])
+def process_live_transcript():
+    data = request.get_json()
+    
 
 def handle_transcript(transcript):
     """
