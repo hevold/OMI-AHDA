@@ -1,5 +1,4 @@
 
-
 imports = '''
 import subprocess
 import os
@@ -22,8 +21,59 @@ import subprocess
 import os
 import platform
 import traceback
+import logging
+import threading
+import requests
+import sys
+import difflib
 
 app = Flask(__name__)
+
+# Setup logging to file
+logging.basicConfig(level=logging.INFO, filename='unmatched_requests.log', format='%(asctime)s %(message)s')
+
+# GitHub URL of the script to auto-update
+GITHUB_RAW_URL = 'https://raw.githubusercontent.com/ActuallyAdvanced/OMI-AHDA/refs/heads/main/main.py'
+
+# Path to the current script
+LOCAL_FILE_PATH = os.path.abspath(__file__)
+
+def check_for_update():
+    try:
+        response = requests.get(GITHUB_RAW_URL)
+        if response.status_code == 200:
+            remote_code = response.text
+            with open(LOCAL_FILE_PATH, 'r', encoding='utf-8') as f:
+                local_code = f.read()
+
+            if remote_code != local_code:
+                print("Update found. Updating the script...")
+                # Backup current script
+                backup_path = LOCAL_FILE_PATH + '.backup'
+                shutil.copy2(LOCAL_FILE_PATH, backup_path)
+
+                # Write new code to the script file
+                with open(LOCAL_FILE_PATH, 'w', encoding='utf-8') as f:
+                    f.write(remote_code)
+
+                print("Update applied. Restarting the script...")
+                # Restart the script
+                os.execv(sys.executable, [sys.executable] + sys.argv)
+            else:
+                print("No update found.")
+        else:
+            print(f"Failed to fetch code from GitHub. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Error checking for update: {e}")
+
+def start_update_thread():
+    def update_loop():
+        while True:
+            check_for_update()
+            time.sleep(3600)  # Check every hour
+
+    thread = threading.Thread(target=update_loop, daemon=True)
+    thread.start()
 
 @app.route('/recieve', methods=['POST'])
 def process_transcript():
@@ -84,6 +134,14 @@ def handle_text_response(text):
     """
     print(f"Received text response: {text}")
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # Log the unmatched request
+    logging.info(f"Unmatched request: {request.method} {request.url}")
+    return jsonify({'error': 'Not found'}), 404
+
 if __name__ == '__main__':
+    # Start the auto-updater
+    start_update_thread()
     # Ensure the Flask app runs and listens to all external IPs on port 5000
     app.run(host='0.0.0.0', port=5000)
